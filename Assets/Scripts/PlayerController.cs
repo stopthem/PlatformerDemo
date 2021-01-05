@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {
-    private PlayerAlice m_playerAlice;
-    private PlayerBob m_playerBob;
     public InputDetection inputDetection;
 
     [HideInInspector] public int direction;
 
     [HideInInspector] public Rigidbody2D rigidBody;
+    
     private Transform m_playerTransform;
 
     private Vector2 m_moveInput;
@@ -28,8 +26,6 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
 
         m_playerTransform = GetComponent<Transform>();
-        m_playerAlice = GetComponent<PlayerAlice>();
-        m_playerBob = GetComponent<PlayerBob>();
     }
 
     public virtual void Update()
