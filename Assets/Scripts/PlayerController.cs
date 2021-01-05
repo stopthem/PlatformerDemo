@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         m_playerBob = GetComponent<PlayerBob>();
     }
 
-    private void Update()
+    public virtual void Update()
     {
         MoveCharacter();
         GetPlayerDirection();
