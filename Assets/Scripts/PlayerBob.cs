@@ -8,11 +8,6 @@ public class PlayerBob : PlayerController
 
     private bool m_isGroundBreaking = false;
 
-    public override void Update()
-    {
-        base.Update();
-    }
-
     public override void FixedUpdate()
     {
         base.FixedUpdate();

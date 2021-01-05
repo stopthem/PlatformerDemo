@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveCharacter();
         GetPlayerDirection();
+        Debug.Log(inputDetection.instance.isMobile);
     }
 
     // handles physics
