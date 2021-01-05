@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         m_playerTransform = GetComponent<Transform>();
     }
 
-    public virtual void Update()
+    private void Update()
     {
         MoveCharacter();
         GetPlayerDirection();
