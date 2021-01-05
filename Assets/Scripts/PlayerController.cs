@@ -5,33 +5,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum Character
-    {
-        Bob,
-        Alice
-    }
-    public Character character;
     private PlayerAlice m_playerAlice;
     private PlayerBob m_playerBob;
     public InputDetection inputDetection;
 
-    private Rigidbody2D m_rigidBody;
+    [HideInInspector] public int direction;
+
+    [HideInInspector] public Rigidbody2D rigidBody;
     private Transform m_playerTransform;
 
     private Vector2 m_moveInput;
 
-    private int m_buttonUsed = 0;
-    private int m_direction;
+    [HideInInspector] public int buttonUsed = 0;
 
     private float m_horizontalMove;
-    private float m_originalGravity;
+    public float moveSpeed;
+    public float jumpSpeed;
 
     private bool m_moveLeft = false, m_moveRight = false;
-    private bool m_isDashing, m_isGroundBreaking;
-    private void Start()
+    private void Awake()
     {
-        m_rigidBody = GetComponent<Rigidbody2D>();
-        m_originalGravity = m_rigidBody.gravityScale;
+        rigidBody = GetComponent<Rigidbody2D>();
 
         m_playerTransform = GetComponent<Transform>();
         m_playerAlice = GetComponent<PlayerAlice>();
@@ -42,45 +36,27 @@ public class PlayerController : MonoBehaviour
     {
         MoveCharacter();
         GetPlayerDirection();
-
     }
 
-    // handles all physics
-    private void FixedUpdate()
+    // handles physics
+    public virtual void FixedUpdate()
     {
-        m_rigidBody.velocity = new Vector2(m_horizontalMove, m_rigidBody.velocity.y);
-
-        if (m_isDashing)
-        {
-            if (m_direction == 1)
-            {
-                m_rigidBody.AddForce(new Vector2(-m_playerAlice.dashLength, 0) * m_playerAlice.dashSpeed, ForceMode2D.Impulse);
-            }
-            else if (m_direction == 2)
-            {
-                m_rigidBody.AddForce(new Vector2(m_playerAlice.dashLength, 0) * m_playerAlice.dashSpeed, ForceMode2D.Impulse);
-            }
-        }
-
-        if (m_isGroundBreaking)
-        {
-            m_rigidBody.AddForce(new Vector2(0, -m_playerBob.gbSpeed), ForceMode2D.Impulse);
-            m_isGroundBreaking = false;
-        }
+        rigidBody.velocity = new Vector2(m_horizontalMove, rigidBody.velocity.y);
     }
 
-    // getting charachter direction based on Y rotation
+    // gets player direction for Alice's dash and further use.
     private void GetPlayerDirection()
     {
-        if (m_playerTransform.rotation == Quaternion.Euler(0, 180, 0))
+        if (transform.rotation == Quaternion.Euler(0, 180, 0))
         {
-            m_direction = 1;
+            direction = 1;
         }
-        else if (m_playerTransform.rotation == Quaternion.Euler(0, 0, 0))
+        else if (transform.rotation == Quaternion.Euler(0, 0, 0))
         {
-            m_direction = 2;
+            direction = 2;
         }
     }
+
     // Moving buttons hold process
     public void MoveLeft()
     {
@@ -100,6 +76,7 @@ public class PlayerController : MonoBehaviour
         m_moveRight = false;
     }
 
+    // handles all moving based on platform and input device
     private void MoveCharacter()
     {
         if (inputDetection.instance.isGamepadEnabled)
@@ -119,17 +96,7 @@ public class PlayerController : MonoBehaviour
             m_moveInput.x = Input.GetAxisRaw("Horizontal");
             m_moveInput.Normalize();
 
-            if (m_playerAlice != null)
-            {
-                if (character == Character.Alice)
-                {
-                    m_horizontalMove = m_playerAlice.moveSpeed * m_moveInput.x;
-                }
-            }
-            else if (character == Character.Bob)
-            {
-                m_horizontalMove = m_playerBob.moveSpeed * m_moveInput.x;
-            }
+            m_horizontalMove = moveSpeed * m_moveInput.x;
 
         }
         if (m_horizontalMove < 0)
@@ -150,51 +117,24 @@ public class PlayerController : MonoBehaviour
             JumpButton();
         }
 
-        m_moveInput.x = Input.GetAxisRaw("Horizontal"); //instead of seperate buttons i used getaxisraw for the movement.
+        //instead of seperate buttons i used getaxisraw for the movement.
+        m_moveInput.x = Input.GetAxisRaw("Horizontal");
         m_moveInput.Normalize();
 
-        if (character == Character.Alice)
-        {
-            m_horizontalMove = m_playerAlice.moveSpeed * m_moveInput.x;
-        }
-        else if (character == Character.Bob)
-        {
-            m_horizontalMove = m_playerBob.moveSpeed * m_moveInput.x;
-        }
+        m_horizontalMove = moveSpeed * m_moveInput.x;
     }
 
     private void HandleMobileMovement()
     {
         if (m_moveLeft)
         {
-            if (m_playerAlice != null)
-            {
-                if (character == Character.Alice)
-                {
-                    m_horizontalMove = -m_playerAlice.moveSpeed;
-
-                }
-            }
-            else if (character == Character.Bob)
-            {
-                m_horizontalMove = -m_playerBob.moveSpeed;
-            }
+            m_horizontalMove = -moveSpeed;
 
             m_playerTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else if (m_moveRight)
         {
-            if (m_playerAlice != null)
-            {
-                if (character == Character.Alice)
-                {
-                    m_horizontalMove = m_playerAlice.moveSpeed;
-                }
-            }
-            else if (character == Character.Bob)
-            {
-                m_horizontalMove = m_playerBob.moveSpeed;
-            }
+            m_horizontalMove = moveSpeed;
 
             m_playerTransform.rotation = Quaternion.Euler(0, 0, 0);
         }
@@ -204,61 +144,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Handles jump button
-    public void JumpButton()
+    // Handles jump button on click
+    public virtual void JumpButton()
     {
-        m_buttonUsed++;
+        buttonUsed++;
 
-        if (m_rigidBody.velocity.y == 0) // is grounded
+        if (rigidBody.velocity.y == 0)
         {
-            m_buttonUsed = 0;
-            if (m_playerAlice != null)
-            {
-                if (character == Character.Alice)
-                {
-                    m_rigidBody.velocity = Vector2.up * m_playerAlice.jumpSpeed;
-                }
-            }
-            else if (character == Character.Bob)
-            {
-                m_rigidBody.velocity = Vector2.up * m_playerBob.jumpSpeed;
-            }
-        }
-        else
-        {
-            //if not grounded
-            if (m_playerAlice != null)
-            {
-                if (character == Character.Alice && m_buttonUsed == 1)
-                {
-                    m_buttonUsed++;
-                    StartCoroutine(DashCoroutine());
-                }
-            }
-            else if (character == Character.Bob && m_buttonUsed == 1)
-            {
-                m_buttonUsed++;
-                m_isGroundBreaking = true;
-            }
-            else
-            {
-                m_isGroundBreaking = false;
-            }
+            buttonUsed = 0;
+            rigidBody.velocity = Vector2.up * jumpSpeed;
         }
     }
-    private IEnumerator DashCoroutine()
-    {
-        m_isDashing = true;
-
-        m_rigidBody.gravityScale = 0; // always dashing straight forward
-
-        yield return new WaitForSeconds(m_playerAlice.dashDuration);
-
-        m_isDashing = false;
-
-        m_rigidBody.gravityScale = m_originalGravity;
-    }
-
-
 
 }
