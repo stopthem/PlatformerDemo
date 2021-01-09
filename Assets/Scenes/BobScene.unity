@@ -263,6 +263,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6419365060253006696, guid: ce1a3bdd92f863c4092bea87142eb8cc,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6419365060253006697, guid: ce1a3bdd92f863c4092bea87142eb8cc,
         type: 3}
       propertyPath: m_RootOrder
@@ -486,8 +491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
   isGamepadEnabled: 0
-  isMobile: 0
-  isJoystickControlsForMobileEnabled: 0
+  isMobile: 1
+  isJoystickControlsForMobileEnabled: 1
   isMovementKeysEnabled: 0
 --- !u!1 &870609344
 GameObject:
