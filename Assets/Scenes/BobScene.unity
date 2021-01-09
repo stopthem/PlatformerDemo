@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -368,6 +369,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ac234991dac024c97d466ae97539ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1155977808}
+  smoothSpeed: 2
+  offset: {x: 3, y: 1.5, z: -15}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -470,8 +486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
   isGamepadEnabled: 0
-  isMobile: 1
-  isJoystickControlsForMobileEnabled: 1
+  isMobile: 0
+  isJoystickControlsForMobileEnabled: 0
   isMovementKeysEnabled: 0
 --- !u!1 &870609344
 GameObject:
@@ -1436,6 +1452,12 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!4 &1155977808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6419365060253006697, guid: ce1a3bdd92f863c4092bea87142eb8cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 188140088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1375287679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3378437237222751061, guid: 5c105bbf5e91db74caa1efacab3d8187,
