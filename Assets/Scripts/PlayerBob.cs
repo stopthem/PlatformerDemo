@@ -14,7 +14,7 @@ public class PlayerBob : PlayerController
 
         if (m_isGroundBreaking)
         {
-            rigidBody.AddForce(new Vector2(0, -gbSpeed), ForceMode2D.Impulse);
+            rigidBody.velocity = Vector2.down * gbSpeed;
             m_isGroundBreaking = false;
         }
     }

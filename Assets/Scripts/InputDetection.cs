@@ -5,7 +5,11 @@ using UnityEngine;
 public class InputDetection : MonoBehaviour
 {
     [HideInInspector]public InputDetection instance;
-    [HideInInspector]public bool isGamepadEnabled = false, isMobile = false;
+    public bool isGamepadEnabled = false, isMobile = true;
+
+    public bool isJoystickControlsForMobileEnabled = true;
+    public bool isMovementKeysEnabled;
+
     private void Awake()
     {
         instance = this;
@@ -26,10 +30,10 @@ public class InputDetection : MonoBehaviour
         {
             isMobile = true;
         }
-        else
-        {
-            isMobile = false;
-        }
+        // else
+        // {
+        //     isMobile = false;
+        // }
         
     }
 }

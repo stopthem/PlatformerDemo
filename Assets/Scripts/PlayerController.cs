@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public int direction;
 
     [HideInInspector] public Rigidbody2D rigidBody;
-    
+
     private Transform m_playerTransform;
 
     private Vector2 m_moveInput;
@@ -20,9 +20,13 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float jumpSpeed;
 
+    private Joystick joystick;
+
     private bool m_moveLeft = false, m_moveRight = false;
     private void Awake()
     {
+        joystick = FindObjectOfType<Joystick>();
+
         rigidBody = GetComponent<Rigidbody2D>();
 
         m_playerTransform = GetComponent<Transform>();
@@ -37,7 +41,14 @@ public class PlayerController : MonoBehaviour
     // handles physics
     public virtual void FixedUpdate()
     {
-        rigidBody.velocity = new Vector2(m_horizontalMove, rigidBody.velocity.y);
+        if (inputDetection.instance.isJoystickControlsForMobileEnabled)
+        {
+            rigidBody.velocity = new Vector2(joystick.Horizontal * moveSpeed, rigidBody.velocity.y);
+        }
+        else
+        {
+            rigidBody.velocity = new Vector2(m_horizontalMove, rigidBody.velocity.y);
+        }
     }
 
     // gets player direction for Alice's dash and further use.
@@ -95,11 +106,11 @@ public class PlayerController : MonoBehaviour
             m_horizontalMove = moveSpeed * m_moveInput.x;
 
         }
-        if (m_horizontalMove < 0)
+        if (rigidBody.velocity.x < 0)
         {
             m_playerTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (m_horizontalMove > 0)
+        else if (rigidBody.velocity.x > 0)
         {
             m_playerTransform.rotation = Quaternion.Euler(0, 0, 0);
         }

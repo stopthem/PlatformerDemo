@@ -7,15 +7,32 @@ public class UIManager : MonoBehaviour
 {
     public InputDetection inputDetection;
     public GameObject mobileButtons;
+
+    public GameObject joystickButtons;
     void Update()
     {
+        if (inputDetection.instance.isMobile && inputDetection.instance.isMovementKeysEnabled)
+        {
+            ShowMovementKeys();
+        }
+        else
+        {
+            HideMovementKeys();
+        }
+
+        if (inputDetection.instance.isMobile && inputDetection.instance.isJoystickControlsForMobileEnabled)
+        {
+            ShowJoystickForMobile();
+        }
+        else
+        {
+            HideJoystickForMobile();
+        }
+        
         if (inputDetection.instance.isGamepadEnabled)
         {
-            HideButtons();
-        }
-        else if (inputDetection.instance.isMobile)
-        {
-            ShowButtons();
+            HideMovementKeys();
+            HideJoystickForMobile();
         }
         //test code
         // else if(Application.platform == RuntimePlatform.WindowsEditor)
@@ -24,12 +41,20 @@ public class UIManager : MonoBehaviour
         // }
     }
 
-    private void HideButtons()
+    private void HideMovementKeys()
     {
         mobileButtons.gameObject.SetActive(false);
     }
-    private void ShowButtons()
+    private void ShowMovementKeys()
     {
         mobileButtons.gameObject.SetActive(true);
+    }
+    private void ShowJoystickForMobile()
+    {
+        joystickButtons.gameObject.SetActive(true);
+    }
+    private void HideJoystickForMobile()
+    {
+        joystickButtons.gameObject.SetActive(false);
     }
 }
