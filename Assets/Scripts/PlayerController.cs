@@ -41,14 +41,7 @@ public class PlayerController : MonoBehaviour
     // handles physics
     public virtual void FixedUpdate()
     {
-        if (inputDetection.instance.isJoystickControlsForMobileEnabled)
-        {
-            rigidBody.velocity = new Vector2(joystick.Horizontal * moveSpeed, rigidBody.velocity.y);
-        }
-        else
-        {
-            rigidBody.velocity = new Vector2(m_horizontalMove, rigidBody.velocity.y);
-        }
+        rigidBody.velocity = new Vector2(m_horizontalMove, rigidBody.velocity.y);
     }
 
     // gets player direction for Alice's dash and further use.
@@ -148,6 +141,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             m_horizontalMove = 0;
+        }
+
+        if (inputDetection.instance.isJoystickControlsForMobileEnabled)
+        {
+            m_horizontalMove = joystick.Horizontal * moveSpeed;
         }
     }
 

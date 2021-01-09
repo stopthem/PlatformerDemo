@@ -471,8 +471,8 @@ MonoBehaviour:
   instance: {fileID: 0}
   isGamepadEnabled: 0
   isMobile: 1
-  isJoystickControlsForMobileEnabled: 0
-  isMovementKeysEnabled: 1
+  isJoystickControlsForMobileEnabled: 1
+  isMovementKeysEnabled: 0
 --- !u!1 &870609344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1504,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: JumpButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3378437237117226924, guid: 5c105bbf5e91db74caa1efacab3d8187,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3378437237217543210, guid: 5c105bbf5e91db74caa1efacab3d8187,
         type: 3}
       propertyPath: m_Name
@@ -1613,6 +1618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3378437237222751061, guid: 5c105bbf5e91db74caa1efacab3d8187,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c105bbf5e91db74caa1efacab3d8187, type: 3}
