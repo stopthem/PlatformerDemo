@@ -99,11 +99,11 @@ public class PlayerController : MonoBehaviour
             m_horizontalMove = moveSpeed * m_moveInput.x;
 
         }
-        if (rigidBody.velocity.x < 0)
+        if (m_horizontalMove < 0)
         {
             m_playerTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (rigidBody.velocity.x > 0)
+        if (m_horizontalMove > 0)
         {
             m_playerTransform.rotation = Quaternion.Euler(0, 0, 0);
         }
@@ -130,13 +130,13 @@ public class PlayerController : MonoBehaviour
         {
             m_horizontalMove = -moveSpeed;
 
-            m_playerTransform.rotation = Quaternion.Euler(0, 180, 0);
+            // m_playerTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else if (m_moveRight)
         {
             m_horizontalMove = moveSpeed;
 
-            m_playerTransform.rotation = Quaternion.Euler(0, 0, 0);
+            // m_playerTransform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
