@@ -1383,7 +1383,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 1013389262}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b9dbe4365ec9cb54496c8c9fe0743cba, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1479,6 +1479,16 @@ PrefabInstance:
       propertyPath: inputDetection
       value: 
       objectReference: {fileID: 8031625}
+    - target: {fileID: 1287023258143849835, guid: ddb70b328b397c94b96621eae9eeb02e,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: b9dbe4365ec9cb54496c8c9fe0743cba, type: 2}
+    - target: {fileID: 1287023258143849836, guid: ddb70b328b397c94b96621eae9eeb02e,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 3ad2d96c1e7938243a4c037278bd46b2, type: 2}
     - target: {fileID: 1287023258143849837, guid: ddb70b328b397c94b96621eae9eeb02e,
         type: 3}
       propertyPath: m_RootOrder

@@ -333,6 +333,11 @@ PrefabInstance:
       propertyPath: inputDetection
       value: 
       objectReference: {fileID: 702220731}
+    - target: {fileID: 6419365060253006703, guid: ce1a3bdd92f863c4092bea87142eb8cc,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: b9dbe4365ec9cb54496c8c9fe0743cba, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce1a3bdd92f863c4092bea87142eb8cc, type: 3}
 --- !u!114 &188140089 stripped
@@ -1468,7 +1473,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 1013389262}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b9dbe4365ec9cb54496c8c9fe0743cba, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
